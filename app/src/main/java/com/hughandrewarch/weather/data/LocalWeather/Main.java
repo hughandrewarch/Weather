@@ -13,15 +13,28 @@ public class Main implements JSONParser {
     private double temp_max;
     private double temp_min;
 
-    public double getTemp() {
-        return temp;
+    public double getTemp(boolean metric) {
+
+        if(metric)
+        {   return temp -  273.15; }
+        else
+        {   return temp;    }
+    }
+    public String getTempString(boolean metric) {
+
+        double temp = getTemp(metric);
+
+        if(metric)
+        {   return (int)(temp) + "°C";    }
+        else
+        {   return (int)(temp) + "°F";    }
     }
 
-    public double getTemp_max() {
+    public double getTempMax() {
         return temp_max;
     }
 
-    public double getTemp_min() {
+    public double getTempMin() {
         return temp_min;
     }
 

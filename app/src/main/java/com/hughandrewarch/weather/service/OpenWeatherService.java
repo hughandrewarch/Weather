@@ -1,11 +1,6 @@
 package com.hughandrewarch.weather.service;
 
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.Looper;
-
 import com.hughandrewarch.weather.data.LocalWeather.Current;
-import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -17,7 +12,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 import rx.Observable;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -26,7 +20,7 @@ public class OpenWeatherService {
 
     private OpenWeatherServiceListener listener;
 
-    Observable.OnSubscribe<Response> asd = new Observable.OnSubscribe<Response>() {
+    private Observable.OnSubscribe<Response> asd = new Observable.OnSubscribe<Response>() {
         @Override
         public void call(Subscriber<? super Response> subscriber) {
 
@@ -54,7 +48,7 @@ public class OpenWeatherService {
         }
     };
 
-    public void blargh()
+    public void getCurrentWeather()
     {
 
         Observable.create(asd)
@@ -63,9 +57,6 @@ public class OpenWeatherService {
                .subscribe(new Subscriber<Response>() {
                     @Override
                     public void onCompleted() {
-
-                        int i = 0;
-                        i++;
 
                     }
 

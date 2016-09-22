@@ -4,6 +4,7 @@ import com.hughandrewarch.weather.data.JSONParser;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -18,6 +19,13 @@ public class Current implements JSONParser {
 
     public Date getTime() {
         return time;
+    }
+
+    public String getTimestamp()
+    {
+        String pattern = "h:mm:ss aa";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(getTime());
     }
 
     public Weather getWeather() {
@@ -39,6 +47,7 @@ public class Current implements JSONParser {
         weather = new Weather(data.optJSONArray("weather").optJSONObject(0));
         main = new Main(data.optJSONObject("main"));
 
-        time = new Date(data.optLong("time"));
+        long lTime = data.optLong("dt")*1000;
+        time = new Date(lTime);
     }
 }
