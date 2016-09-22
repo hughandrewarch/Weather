@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:text="WEATHER"
             android:textSize="25sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="sans-serif-light"
             android:layout_toEndOf="@id/current_icon"
             android:layout_above="@+id/current_cond"/>
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:text="WEATHER"
             android:textSize="30sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="sans-serif-light"
             android:layout_toEndOf="@id/current_icon"
             android:layout_above="@+id/current_updated"/>
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:text="WEATHER"
             android:textSize="10sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="sans-serif-light"
             android:layout_toEndOf="@id/current_icon"
             android:layout_alignBottom="@id/current_icon"/>

@@ -156,8 +156,6 @@ public class OpenWeatherService {
 
         void serviceForecastSuccess(Forecast forecast);
         void serviceForecastFailure(Exception exception);
-
-        void fack(Response response);
     }
 
 }
