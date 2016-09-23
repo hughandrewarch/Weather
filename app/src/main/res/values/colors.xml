@@ -7,11 +7,13 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
-    <color name="red">#990000</color>
-    <color name="magenta">#990099</color>
-    <color name="green">#009900</color>
-    <color name="yellow">#999900</color>
-    <color name="blue">#000099</color>
-    <color name="cyan">#009999</color>
+    <color name="mask30">#30000000</color>
+
+    <color name="red99">#990000</color>
+    <color name="magenta99">#990099</color>
+    <color name="green99">#009900</color>
+    <color name="yellow99">#999900</color>
+    <color name="blue99">#000099</color>
+    <color name="cyan99">#009999</color>
 
 </resources>

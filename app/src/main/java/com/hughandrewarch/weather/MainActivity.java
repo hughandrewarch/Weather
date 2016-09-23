@@ -5,9 +5,11 @@ import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hughandrewarch.weather.data.LocalWeather.Current;
@@ -15,14 +17,18 @@ import com.hughandrewarch.weather.data.LocalWeather.Forecast;
 import com.hughandrewarch.weather.service.OpenWeatherService;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private OpenWeatherService openWeatherService;
 
     private Animator colourAnimator;
 
-    private LinearLayout back;
-    private TextView title;
+    private RecyclerView recyclerView;
+    private ForecastAdapter mAdapter;
+
+    private RelativeLayout back;
     private TextView currentTemp;
     private TextView currentCond;
     private TextView currentUpdated;
@@ -46,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         openWeatherService = new OpenWeatherService();
 
-        back = (LinearLayout)findViewById(R.id.main_back);
-        title = (TextView)findViewById(R.id.temp_text);
+        back = (RelativeLayout)findViewById(R.id.main_back);
         currentTemp = (TextView)findViewById(R.id.current_temp);
         currentCond = (TextView)findViewById(R.id.current_cond);
         currentUpdated = (TextView)findViewById(R.id.current_updated);
@@ -56,25 +61,26 @@ public class MainActivity extends AppCompatActivity {
         switch(now)
         {
             case RED:
-                back.setBackgroundResource(R.color.red);break;
+                back.setBackgroundResource(R.color.red99);break;
             case MAGENTA:
-                back.setBackgroundResource(R.color.magenta);break;
+                back.setBackgroundResource(R.color.magenta99);break;
             case BLUE:
-                back.setBackgroundResource(R.color.blue);break;
+                back.setBackgroundResource(R.color.blue99);break;
             case CYAN:
-                back.setBackgroundResource(R.color.cyan);break;
+                back.setBackgroundResource(R.color.cyan99);break;
             case GREEN:
-                back.setBackgroundResource(R.color.green);break;
+                back.setBackgroundResource(R.color.green99);break;
             case YELLOW:
-                back.setBackgroundResource(R.color.yellow);break;
+                back.setBackgroundResource(R.color.yellow99);break;
         }
 
-        title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        recyclerView = (RecyclerView) findViewById(R.id.forecast_list);
+        mAdapter = new ForecastAdapter(getBaseContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
 
-            }
-        });
     }
 
     @Override
@@ -82,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         openWeatherService.setListener(openWeatherServiceListener);
         openWeatherService.getCurrentWeather();
+        openWeatherService.getForecastWeather();
 
         if(colourAnimator == null)
         {   colourAnimator = colourAnimator();
@@ -109,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
     private OpenWeatherService.OpenWeatherServiceListener openWeatherServiceListener = new OpenWeatherService.OpenWeatherServiceListener() {
         @Override
         public void serviceCurrentSuccess(Current current) {
-            title.setText(current.getWeather().getDescription());
 
             currentCond.setText(current.getWeather().getDescription().toUpperCase());
             currentTemp.setText(current.getMain().getTempString(true));
@@ -126,7 +132,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void serviceForecastSuccess(Forecast forecast) {
+        public void serviceForecastSuccess(List<Forecast> forecasts) {
+
+            mAdapter = new ForecastAdapter(forecasts, getBaseContext());
+            recyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
 
         }
 
@@ -154,28 +164,28 @@ public class MainActivity extends AppCompatActivity {
                 {
                     default:
                     case RED:
-                        current = getResources().getColor(R.color.red);
-                        next = getResources().getColor(R.color.magenta);
+                        current = getResources().getColor(R.color.red99);
+                        next = getResources().getColor(R.color.magenta99);
                         break;
                     case MAGENTA:
-                        current = getResources().getColor(R.color.magenta);
-                        next = getResources().getColor(R.color.blue);
+                        current = getResources().getColor(R.color.magenta99);
+                        next = getResources().getColor(R.color.blue99);
                         break;
                     case BLUE:
-                        current = getResources().getColor(R.color.blue);
-                        next = getResources().getColor(R.color.cyan);
+                        current = getResources().getColor(R.color.blue99);
+                        next = getResources().getColor(R.color.cyan99);
                         break;
                     case CYAN:
-                        current = getResources().getColor(R.color.cyan);
-                        next = getResources().getColor(R.color.green);
+                        current = getResources().getColor(R.color.cyan99);
+                        next = getResources().getColor(R.color.green99);
                         break;
                     case GREEN:
-                        current = getResources().getColor(R.color.green);
-                        next = getResources().getColor(R.color.yellow);
+                        current = getResources().getColor(R.color.green99);
+                        next = getResources().getColor(R.color.yellow99);
                         break;
                     case YELLOW:
-                        current = getResources().getColor(R.color.yellow);
-                        next = getResources().getColor(R.color.red);
+                        current = getResources().getColor(R.color.yellow99);
+                        next = getResources().getColor(R.color.red99);
                         break;
                 }
 

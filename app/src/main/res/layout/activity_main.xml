@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_back"
     android:layout_width="match_parent"
@@ -7,59 +7,70 @@
     android:orientation="vertical"
     tools:context="com.hughandrewarch.weather.MainActivity">
 
+    <ImageView
+        android:id="@+id/current_icon"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
 
     <TextView
-        android:id="@+id/temp_text"
+        android:id="@+id/current_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="WEATHER"
+        android:textSize="25sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/current_icon"/>
 
-    <RelativeLayout
+    <TextView
+        android:id="@+id/current_cond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WEATHER"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/current_temp"/>
+    <TextView
+        android:id="@+id/current_updated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WEATHER"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-light"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/current_cond"/>
+
+
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:text="Forecast"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:fontFamily="sans-serif-light"
+        android:paddingStart="20dp"
+        android:layout_above="@+id/forecast_list"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white"
+        android:layout_above="@+id/forecast_list"/>
 
-        <ImageView
-            android:id="@+id/current_icon"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="40dp"/>
-
-        <TextView
-            android:id="@+id/current_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WEATHER"
-            android:textSize="25sp"
-            android:textColor="@color/white"
-            android:fontFamily="sans-serif-light"
-            android:layout_toEndOf="@id/current_icon"
-            android:layout_above="@+id/current_cond"/>
-
-        <TextView
-            android:id="@+id/current_cond"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WEATHER"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:fontFamily="sans-serif-light"
-            android:layout_toEndOf="@id/current_icon"
-            android:layout_above="@+id/current_updated"/>
-        <TextView
-            android:id="@+id/current_updated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="WEATHER"
-            android:textSize="10sp"
-            android:textColor="@color/white"
-            android:fontFamily="sans-serif-light"
-            android:layout_toEndOf="@id/current_icon"
-            android:layout_alignBottom="@id/current_icon"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/forecast_list"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:layout_alignParentBottom="true">
 
 
-    </RelativeLayout>
+    </android.support.v7.widget.RecyclerView>
 
 
-</LinearLayout>
+</RelativeLayout>

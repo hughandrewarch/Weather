@@ -14,7 +14,7 @@ public class Current implements JSONParser {
 
     public Date time;
 
-    private Weather weather;
+    protected Weather weather;
     private Main main;
 
     public Date getTime() {

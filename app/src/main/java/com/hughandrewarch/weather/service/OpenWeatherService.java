@@ -4,17 +4,18 @@ import android.os.Looper;
 
 import com.hughandrewarch.weather.data.LocalWeather.Current;
 import com.hughandrewarch.weather.data.LocalWeather.Forecast;
-import com.squareup.okhttp.Call;
 import com.squareup.okhttp.HttpUrl;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import com.squareup.okhttp.ResponseBody;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -86,7 +87,7 @@ public class OpenWeatherService {
 
     }
 
-    //Forecast
+    //Forecast2
     private Observable.OnSubscribe<JSONObject> forecastObservable = new Observable.OnSubscribe<JSONObject>() {
         @Override
         public void call(Subscriber<? super JSONObject> subscriber) {
@@ -134,10 +135,14 @@ public class OpenWeatherService {
                     @Override
                     public void onNext(JSONObject jResponse) {
 
-                        Forecast forecast = new Forecast(jResponse);
+                        List<Forecast> forecasts = new ArrayList<>();
+
+                        JSONArray jList = jResponse.optJSONArray("list");
+                        for(int i = 0; i < jList.length(); i++)
+                        {   forecasts.add(new Forecast(jList.optJSONObject(i)));  }
 
                         if(listener!=null)
-                        {   listener.serviceForecastSuccess(forecast);   }
+                        {   listener.serviceForecastSuccess(forecasts);   }
 
                     }
                 });
@@ -154,7 +159,7 @@ public class OpenWeatherService {
         void serviceCurrentSuccess(Current current);
         void serviceCurrentFailure(Exception exception);
 
-        void serviceForecastSuccess(Forecast forecast);
+        void serviceForecastSuccess(List<Forecast> forecasts);
         void serviceForecastFailure(Exception exception);
     }
 
