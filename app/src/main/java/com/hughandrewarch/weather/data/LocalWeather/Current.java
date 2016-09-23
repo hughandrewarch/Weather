@@ -28,6 +28,20 @@ public class Current implements JSONParser {
         return format.format(getTime());
     }
 
+    public String getDay()
+    {
+        String pattern = "EEEE";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(getTime());
+    }
+
+    public String getDate()
+    {
+        String pattern = "EEE, MMM d";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(getTime());
+    }
+
     public Weather getWeather() {
         return weather;
     }

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class Forecast implements JSONParser {
 
-    List<Current> forecast;
+    private List<Current> forecast;
 
 
     public Forecast(JSONObject data)
@@ -23,6 +23,12 @@ public class Forecast implements JSONParser {
         forecast = new ArrayList<>();
         parse(data);
     }
+
+    public int getCount()
+    {   return forecast.size(); }
+
+    public Current get(int i)
+    {   return forecast.get(i); }
 
     @Override
     public void parse(JSONObject data) {

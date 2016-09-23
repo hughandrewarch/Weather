@@ -30,12 +30,40 @@ public class Main implements JSONParser {
         {   return (int)(temp) + "°F";    }
     }
 
-    public double getTempMax() {
-        return temp_max;
+    public double getTempMax(boolean metric) {
+
+        if(metric)
+        {   return temp_max -  273.15; }
+        else
+        {   return temp_max;    }
     }
 
-    public double getTempMin() {
-        return temp_min;
+    public String getTempMaxString(boolean metric) {
+
+        double temp = getTempMax(metric);
+
+        if(metric)
+        {   return (int)(temp) + "°C";    }
+        else
+        {   return (int)(temp) + "°F";    }
+    }
+
+    public double getTempMin(boolean metric) {
+
+        if(metric)
+        {   return temp_min -  273.15; }
+        else
+        {   return temp_min;    }
+    }
+
+    public String getTempMinString(boolean metric) {
+
+        double temp = getTempMin(metric);
+
+        if(metric)
+        {   return (int)(temp) + "°C";    }
+        else
+        {   return (int)(temp) + "°F";    }
     }
 
     public Main(JSONObject data)
